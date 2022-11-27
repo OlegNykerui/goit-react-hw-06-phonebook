@@ -1,21 +1,26 @@
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import nextId from 'react-id-generator';
 import ContactItem from './ContactItem';
 
 import { List } from '../Form/Form.styled';
 
-const ContactsList = ({ contacts, deleteButton }) => {
+export const ContactsList = () => {
+  const filterState = useSelector(state => state.filter);
+  const filteredContacts = useSelector(state => {
+    return state.contacts.filter(item =>
+      item.name.toLowerCase().includes(filterState.toLowerCase())
+    );
+  });
   return (
     <>
       <List>
-        {contacts.map(contact => {
+        {filteredContacts.map(({ id, name, number }) => {
           return (
             <ContactItem
               key={nextId()}
-              id={contact.id}
-              name={contact.name}
-              number={contact.number}
-              deleteButton={deleteButton}
+              id={id}
+              name={name}
+              number={number}
             ></ContactItem>
           );
         })}
@@ -23,15 +28,3 @@ const ContactsList = ({ contacts, deleteButton }) => {
     </>
   );
 };
-
-ContactsList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
-};
-
-export default ContactsList;

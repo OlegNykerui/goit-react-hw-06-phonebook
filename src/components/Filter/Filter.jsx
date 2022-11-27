@@ -1,17 +1,20 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { change } from 'redux/filterSlice';
 import { Input } from 'components/Filter/Filter.styled';
 
-const Filter = ({ value, onChange }) => {
+export const Filter = () => {
+  const dispatch = useDispatch();
+  const filter = useSelector(state => state.filter);
+
   return (
     <div>
       <Input
-        onChange={onChange}
+        onChange={e => dispatch(change(e.target.value))}
         type="text"
-        value={value}
+        value={filter}
         name="filter"
         id="filter"
       />
     </div>
   );
 };
-
-export default Filter;

@@ -1,23 +1,21 @@
-import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from 'redux/contactSlice';
 
 import { Item, ButtonDelete } from '../Form/Form.styled';
 
-const ContactItem = ({ id, name, number, deleteButton }) => {
+const ContactItem = ({ id, name, number }) => {
+  const dispatch = useDispatch();
   return (
     <>
       <Item>
         {`${name} : tel - ${number}`}
 
-        <ButtonDelete onClick={() => deleteButton(id)} type="button">
+        <ButtonDelete onClick={() => dispatch(deleteContact(id))} type="button">
           Delete
         </ButtonDelete>
       </Item>
     </>
   );
-};
-
-ContactItem.propTypes = {
-  deleteButton: PropTypes.func.isRequired,
 };
 
 export default ContactItem;
