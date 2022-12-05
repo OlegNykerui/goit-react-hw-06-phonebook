@@ -10,7 +10,7 @@ const ContactsSlice = createSlice({
     { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
   ],
   reducers: {
-    addContact: {
+    addContactAction: {
       reducer: (state, action) => {
         const isSameName = state.some(
           i => i.name.toLowerCase() === action.payload.name.toLowerCase()
@@ -24,12 +24,11 @@ const ContactsSlice = createSlice({
         return { payload: { id, name, number } };
       },
     },
-    deleteContact(state, action) {
+    deleteContactAction(state, action) {
       return state.filter(contact => contact.id !== action.payload);
     },
   },
 });
 
-export const { addContact, deleteContact, filterContact } =
-  ContactsSlice.actions;
+export const { addContactAction, deleteContactAction } = ContactsSlice.actions;
 export const contactsReducer = ContactsSlice.reducer;

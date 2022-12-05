@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/contactSlice';
+import { deleteContactAction } from 'redux/slices/contactSlice';
 
 import { Item, ButtonDelete } from '../Form/Form.styled';
 
@@ -10,7 +10,10 @@ const ContactItem = ({ id, name, number }) => {
       <Item>
         {`${name} : tel - ${number}`}
 
-        <ButtonDelete onClick={() => dispatch(deleteContact(id))} type="button">
+        <ButtonDelete
+          onClick={() => dispatch(deleteContactAction(id))}
+          type="button"
+        >
           Delete
         </ButtonDelete>
       </Item>

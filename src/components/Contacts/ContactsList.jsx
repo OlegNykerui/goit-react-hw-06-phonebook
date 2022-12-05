@@ -12,19 +12,17 @@ export const ContactsList = () => {
     );
   });
   return (
-    <>
-      <List>
-        {filteredContacts.map(({ id, name, number }) => {
-          return (
-            <ContactItem
-              key={nextId()}
-              id={id}
-              name={name}
-              number={number}
-            ></ContactItem>
-          );
-        })}
-      </List>
-    </>
+    <List>
+      {filteredContacts.map(({ id, name, number }) => {
+        return (
+          <ContactItem
+            key={nextId()}
+            id={id}
+            name={name}
+            number={number}
+          ></ContactItem>
+        );
+      })}
+    </List>
   );
 };
